@@ -4,7 +4,7 @@
   "description": "My take on Free Code Camp's Timestamp Microservice project.",
   "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "Matthew Feidt",
   "license": "ISC",
