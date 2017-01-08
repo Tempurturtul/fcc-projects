@@ -4,7 +4,7 @@
   "description": "My take on Free Code Camp's URL Shortener Microservice project.",
   "main": "server.js",
   "scripts": {
-    "deploy": "gh-pages -d ./ -b heroku-url-shortener-microservice",
+    "deploy": "gh-pages -d ./ --remove 'node_modules' -b heroku-url-shortener-microservice",
     "start": "node server.js"
   },
   "author": "Matthew Feidt",
