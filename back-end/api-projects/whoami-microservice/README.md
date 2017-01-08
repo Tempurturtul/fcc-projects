@@ -2,7 +2,7 @@
 
 My take on Free Code Camp's [Request Header Parser Microservice](https://www.freecodecamp.com/challenges/request-header-parser-microservice) project.
 
-**Completed:** TBD
+**Completed:** January 2017
 
 ## Requirements
 
