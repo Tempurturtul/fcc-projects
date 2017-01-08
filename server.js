@@ -1,7 +1,10 @@
 const express = require('express');
+const pg = require('pg');
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+pg.defaults.ssl = true;
 
 app.use(express.static('public'));
 
@@ -23,14 +26,23 @@ app.get('/new/*', (request, response) => {
 });
 
 app.get('/:id', (request, response) => {
-  // const url = retrieve(request.params.id);
-  const url = 'https://www.google.com';
+  pg.connect(process.env.DATABASE_URL, (err, client) => {
+    if (err) {
+      console.error(err);
+      return response.status(500).end('Error connecting to database:\n' + err);  // 500 Internal Server Error
+    }
 
-  if (!url) {
-    return response.status(404).end('Shortened URL not found.');
-  }
+    response.end('Successfully connected to databse.');
+  });
 
-  response.redirect(302, url);  // 302 Found
+  // // const url = retrieve(request.params.id);
+  // const url = 'https://www.google.com';
+  //
+  // if (!url) {
+  //   return response.status(404).end('Shortened URL not found.');
+  // }
+  //
+  // response.redirect(302, url);  // 302 Found
 });
 
 app.listen(port, () => {
