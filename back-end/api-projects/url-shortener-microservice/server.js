@@ -56,7 +56,9 @@ app.get('/s/:id', (request, response) => {
     .then((url) => {
       if (!url) {
         // 404 Not Found
-        return response.status(404).send('URL not found.');
+        return response.status(404).json({
+          error: 'URL not in database.'
+        });
       }
 
       response.redirect(url);
