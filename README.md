@@ -2,7 +2,9 @@
 
 My take on Free Code Camp's [URL Shortener Microservice](https://www.freecodecamp.com/challenges/url-shortener-microservice) project.
 
-**Completed:** TBD
+**[View here.](https://tfusms.herokuapp.com/)**
+
+**Completed:** January 2017
 
 ## Requirements
 
