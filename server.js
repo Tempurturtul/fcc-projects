@@ -1,6 +1,7 @@
 const express = require('express');
 const pg = require('pg');
 const url = require('url');
+const validURL = require('valid-url');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,7 +26,14 @@ app.get('/', (request, response) => {
 });
 
 app.get('/new/*', (request, response) => {
-  const original_url = request.path.split('new/')[1];
+  const original_url = validURL.isWebUri(request.path.split('new/')[1]);
+
+  if (!original_url) {
+    return response.json({
+      error: 'Invalid URL.'
+    });
+  }
+
   storeURL(original_url)
     .then((id) => {
       if (!id) {
