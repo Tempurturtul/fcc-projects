@@ -1,11 +1,21 @@
 const express = require('express');
 const pg = require('pg');
-const app = express();
-const pool = new pg.Pool(process.env.DATABASE_URL);
+const url = require('url');
 
+const app = express();
 const port = process.env.PORT || 3000;
 
-pg.defaults.ssl = true;
+// Heroku-specific. (See: https://www.npmjs.com/package/pg-pool.)
+const poolParams = url.parse(process.env.DATABASE_URL);
+const poolAuth = params.auth.split(':');
+const pool = new pg.Pool({
+  user: auth[0],
+  password: auth[1],
+  host: params.hostname,
+  port: params.port,
+  database: params.pathname.split('/')[1],
+  ssl: true,
+});
 
 app.use(express.static('public'));
 
