@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Heroku-specific. (See: https://www.npmjs.com/package/pg-pool.)
-const poolParams = url.parse(process.env.DATABASE_URL);
+const poolParams = url.parse(process.env.DATABASE_URL || 'postgres://postgres:foobar@localhost:5432/mydb');
 const poolAuth = poolParams.auth.split(':');
 const pool = new pg.Pool({
   user: poolAuth[0],
@@ -21,8 +21,7 @@ const pool = new pg.Pool({
 app.use(express.static('public'));
 
 app.get('/', (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/html' })
-  response.end('index');
+  response.send('index');
 });
 
 app.get('/new/*', (request, response) => {
@@ -36,11 +35,6 @@ app.get('/new/*', (request, response) => {
 
   storeURL(original_url)
     .then((id) => {
-      if (!id) {
-        console.error('\`storeURL\` did not return an id.');
-        return response.status(500).end();
-      }
-
       const short_url = `${request.protocol}://${request.get('host')}/s/${id}`;
 
       response.json({
@@ -49,8 +43,9 @@ app.get('/new/*', (request, response) => {
       });
     })
     .catch((err) => {
-      console.error('Error storing URL:\n', err);
-      return response.status(500).end();  // 500 Internal Server Error
+      console.error('Error storing URL:', err.message);
+      // 500 Internal Server Error
+      return response.status(500).send('Error storing URL: ' + err.message);
     });
 });
 
@@ -60,14 +55,16 @@ app.get('/s/:id', (request, response) => {
   retrieveURL(id)
     .then((url) => {
       if (!url) {
-        return response.status(404).end();
+        // 404 Not Found
+        return response.status(404).send('URL not found.');
       }
 
-      response.redirect(302, url);  // 302 Found
+      response.redirect(url);
     })
     .catch((err) => {
-      console.error('Error retrieving stored URL:\n', err)
-      return response.status(500).end();  // 500 Internal Server Error
+      console.error('Error retrieving URL:', err.message);
+      // 500 Internal Server Error
+      return response.status(500).send('Error retrieving URL: ' + err.message);
     });
 });
 
@@ -85,21 +82,25 @@ function storeURL(original) {
         } else {
           // Hasn't been stored yet.
           pool.query(`INSERT INTO urls (original) VALUES ('${original}') RETURNING short_id`, (err, result) => {
-            if (err) reject('Failed to store url.');
+            if (err) {
+              reject(new Error('Failed to add url to database.'));
+            }
 
             // Successfully stored.
-            resolve(result && result.rows.length ? result.rows[0].short_id : null);
+            resolve(result.rows[0].short_id);
           });
         }
       })
-      .catch((err) => reject('Failed to check if url was already stored.'));
+      .catch((err) => reject(err));
   });
 }
 
 function retrieveURL(short_id) {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT original FROM urls WHERE short_id = '${short_id}'`, (err, result) => {
-      if (err) reject('Failed to retrieve URL.');
+      if (err) {
+        reject(new Error('Failed to retrieve url from database.'));
+      }
 
       resolve(result && result.rows.length ? result.rows[0].original : null);
     });
@@ -109,7 +110,9 @@ function retrieveURL(short_id) {
 function retrieveShortID(original) {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT short_id FROM urls WHERE original = '${original}'`, (err, result) => {
-      if (err) reject('Failed to retrieve short_id:\n' + err);
+      if (err) {
+        reject(new Error('Failed to retrieve short_id from database.'));
+      }
 
       resolve(result && result.rows.length ? result.rows[0].short_id : null);
     });
