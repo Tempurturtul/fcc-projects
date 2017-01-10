@@ -15,5 +15,8 @@
     "express": "^4.14.0",
     "express-useragent": "^1.0.6",
     "ipware": "^1.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^0.12.0"
   }
 }
