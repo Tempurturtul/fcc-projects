@@ -7,13 +7,13 @@ const port = process.env.PORT || 3000;
 
 // Heroku-specific. (See: https://www.npmjs.com/package/pg-pool.)
 const poolParams = url.parse(process.env.DATABASE_URL);
-const poolAuth = params.auth.split(':');
+const poolAuth = poolParams.auth.split(':');
 const pool = new pg.Pool({
-  user: auth[0],
-  password: auth[1],
-  host: params.hostname,
-  port: params.port,
-  database: params.pathname.split('/')[1],
+  user: poolAuth[0],
+  password: poolAuth[1],
+  host: poolParams.hostname,
+  port: poolParams.port,
+  database: poolParams.pathname.split('/')[1],
   ssl: true,
 });
 
