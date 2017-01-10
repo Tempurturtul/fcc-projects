@@ -70,9 +70,7 @@ function storeURL(original) {
             if (err) reject('Failed to store url.');
 
             // Successfully stored.
-            if (result && result.rows && result.rows[0]) {
-              resolve(result.rows[0].short_id || null);
-            }
+            resolve(result && result.rows.length ? result.rows[0].short_id : null);
           });
         }
       })
@@ -85,7 +83,7 @@ function retrieveURL(short_id) {
     pool.query(`SELECT original FROM urls WHERE short_id = '${short_id}'`, (err, result) => {
       if (err) reject('Failed to retrieve URL.');
 
-      resolve(result.rows.length ? result.rows[0].original : null);
+      resolve(result && result.rows.length ? result.rows[0].original : null);
     });
   });
 }
@@ -95,7 +93,7 @@ function retrieveShortID(original) {
     pool.query(`SELECT short_id FROM urls WHERE original = '${original}'`, (err, result) => {
       if (err) reject('Failed to retrieve short_id:\n' + err);
 
-      resolve(result.rows.length ? result.rows[0].short_id : null);
+      resolve(result && result.rows.length ? result.rows[0].short_id : null);
     });
   });
 }
