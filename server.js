@@ -1,6 +1,7 @@
 const express = require('express');
 const pg = require('pg');
 const app = express();
+const pool = new pg.Pool(process.env.DATABASE_URL);
 
 const port = process.env.PORT || 3000;
 
@@ -15,36 +16,86 @@ app.get('/', (request, response) => {
 
 app.get('/new/*', (request, response) => {
   const original_url = request.path.split('new/')[1];
-  // const id = store(original_url);
-  const id = '0000';
-  const short_url = `${request.protocol}://${request.get('host')}/${id}`;
+  storeURL(original_url)
+    .then((id) => {
+      if (!id) {
+        console.error('\`storeURL\` did not return an id.');
+        return response.status(500).end();
+      }
 
-  response.json({
-    original_url,
-    short_url,
-  });
+      const short_url = `${request.protocol}://${request.get('host')}/s/${id}`;
+
+      response.json({
+        original_url,
+        short_url,
+      });
+    })
+    .catch((err) => {
+      console.error('Error storing URL:\n', err);
+      return response.status(500).end();  // 500 Internal Server Error
+    });
 });
 
-app.get('/:id', (request, response) => {
-  pg.connect(process.env.DATABASE_URL, (err, client) => {
-    if (err) {
-      console.error(err);
-      return response.status(500).end('Error connecting to database:\n' + err);  // 500 Internal Server Error
-    }
+app.get('/s/:id', (request, response) => {
+  const id = request.params.id;
 
-    response.end('Successfully connected to databse.');
-  });
+  retrieveURL(id)
+    .then((url) => {
+      if (!url) {
+        return response.status(404).end();
+      }
 
-  // // const url = retrieve(request.params.id);
-  // const url = 'https://www.google.com';
-  //
-  // if (!url) {
-  //   return response.status(404).end('Shortened URL not found.');
-  // }
-  //
-  // response.redirect(302, url);  // 302 Found
+      response.redirect(302, url);  // 302 Found
+    })
+    .catch((err) => {
+      console.error('Error retrieving stored URL:\n', err)
+      return response.status(500).end();  // 500 Internal Server Error
+    });
 });
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);
 });
+
+function storeURL(original) {
+  return new Promise((resolve, reject) => {
+    // First make sure it wasn't already stored.
+    retrieveShortID(original)
+      .then((id) => {
+        if (id) {
+          resolve(id);
+        } else {
+          // Hasn't been stored yet.
+          pool.query(`INSERT INTO urls (original) VALUES ('${original}') RETURNING short_id`, (err, result) => {
+            if (err) reject('Failed to store url.');
+
+            // Successfully stored.
+            if (result && result.rows && result.rows[0]) {
+              resolve(result.rows[0].short_id || null);
+            }
+          });
+        }
+      })
+      .catch((err) => reject('Failed to check if url was already stored.'));
+  });
+}
+
+function retrieveURL(short_id) {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT original FROM urls WHERE short_id = '${short_id}'`, (err, result) => {
+      if (err) reject('Failed to retrieve URL.');
+
+      resolve(result.rows.length ? result.rows[0].original : null);
+    });
+  });
+}
+
+function retrieveShortID(original) {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT short_id FROM urls WHERE original = '${original}'`, (err, result) => {
+      if (err) reject('Failed to retrieve short_id:\n' + err);
+
+      resolve(result.rows.length ? result.rows[0].short_id : null);
+    });
+  });
+}
