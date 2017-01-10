@@ -53,9 +53,13 @@ app.get('/s/:id', (request, response) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}.`);
-});
+pool
+  .query('CREATE TABLE IF NOT EXISTS urls (original text UNIQUE NOT NULL, short_id smallserial PRIMARY KEY)')
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}.`);
+    });
+  });
 
 function storeURL(original) {
   return new Promise((resolve, reject) => {
