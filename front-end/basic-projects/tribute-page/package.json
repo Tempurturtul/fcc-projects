@@ -6,7 +6,7 @@
     "build": "mkdir dist && mkdir dist/tribute-page && cp -r src/* dist/tribute-page",
     "clean": "rm -r dist",
     "predeploy": "npm run build",
-    "deploy": "gh-pages --dist dist --add --branch gh-pages",
+    "deploy": "gh-pages --dist dist --add",
     "postdeploy": "npm run clean"
   },
   "author": "Matthew Feidt",
