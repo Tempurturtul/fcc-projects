@@ -9,6 +9,7 @@ My [Free Code Camp](https://www.freecodecamp.com/) projects.
 **Front End**
 
 - [Tribute Page](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/basic-projects/tribute-page)
+- [Random Quote Machine](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/intermediate-projects/random-quote-machine)
 
 **Back End**
 
