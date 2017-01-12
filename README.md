@@ -6,7 +6,7 @@ My [Free Code Camp](https://www.freecodecamp.com/) projects.
 
 **Front End**
 
-- [Tribute Page](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/tribute-page)
+- [Tribute Page](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/basic-projects/tribute-page)
 
 **Back End**
 
