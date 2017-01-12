@@ -85,7 +85,7 @@
                      '–' + quotes[currentQuoteIndex].source +
                    '</p>';
     var tweetBtn = '<a class="twitter-share-button" ' +
-                     'href="https://twitter.com/intent/tweet" data-text="' + trailOff(quotes[currentQuoteIndex].quote, 140) + '">' +
+                     'href="https://twitter.com/intent/tweet" data-count="none" data-url="none" data-text="' + trailOff(quotes[currentQuoteIndex].quote, 140) + '">' +
                      'Tweet' +
                    '</a>';
 
