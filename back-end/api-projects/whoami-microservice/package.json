@@ -4,6 +4,7 @@
   "description": "My take on Free Code Camp's Request Header Parser Microservice project.",
   "main": "server.js",
   "scripts": {
+    "deploy": "node tasks/deploy.js",
     "start": "node server.js"
   },
   "author": "Matthew Feidt",
