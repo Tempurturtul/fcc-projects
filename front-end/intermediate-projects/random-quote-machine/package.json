@@ -1,0 +1,17 @@
+{
+  "name": "random-quote-machine",
+  "version": "1.0.0",
+  "description": "My take on Free Code Camp's Random Quote Machine project.",
+  "scripts": {
+    "build": "mkdir -p dist/random-quote-machine && cp -r src/* dist/random-quote-machine",
+    "clean": "rm -r dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist dist --add",
+    "postdeploy": "npm run clean"
+  },
+  "author": "Matthew Feidt",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^0.12.0"
+  }
+}

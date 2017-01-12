@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Free Code Camp project - Random Quote Machine">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Random Quote Machine</title>
+
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Twitter Widgets -->
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-XXXXX-Y', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  </head>
+
+  <body>
+    <div id="root">
+
+      <div class="quote-box">
+        <!-- Quote. -->
+        <!-- Citation. -->
+        <!-- Tweet button. -->
+      </div>
+
+      <!-- New quote button. -->
+      <input class="new-quote-btn" type="button" value="Another!">
+
+      <script src="app.js"></script>
+    </div>
+  </body>
+</html>

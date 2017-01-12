@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-attachment: fixed;
+  background-image: url('img/morrowindbg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#root {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.quote-box {
+  background: rgba(255,255,255,0.7);
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px 1px #000;
+  font-size: 1.2em;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.new-quote-btn {
+  font-size: 1.3em;
+  margin: 10px;
+}
