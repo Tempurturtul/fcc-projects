@@ -2,9 +2,9 @@
 
 My take on Free Code Camp's [Build a Random Quote Machine](https://www.freecodecamp.com/challenges/build-a-random-quote-machine) project.
 
-~~**[View here.](https://tempurturtul.github.io/fcc-projects/random-quote-machine/)**~~
+**[View here.](https://tempurturtul.github.io/fcc-projects/random-quote-machine/)**
 
-**Completed:** TBD
+**Completed:** January 2017
 
 ## Requirements
 
