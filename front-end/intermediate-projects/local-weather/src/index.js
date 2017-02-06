@@ -18,6 +18,16 @@ function init() {
 	// Remove no-js classes.
 	weatherElem.classList.remove('weather--no-js');
 
+	// Check connection.
+	if (window.location.protocol === 'https:') {
+		// Special case, API restricted to http.
+		weatherDataElem.innerHTML = `
+			<p>You are using a secure https: connection.</p>
+			<p>Unfortunately due to restrictions with OpenWeatherMap's free services, we can only retrieve weather data using an unsecure http: connection.</p>
+			<p>Consider allowing this connection by clicking the shield or lock in your address bar and allowing "unsafe scripts" or similar.</p>
+		`;
+	}
+
 	// Add event listeners.
 	weatherFormElem.addEventListener('submit', handleWeatherFormSubmit);
 	weatherUnitToggleElem.addEventListener('click', handleWeatherUnitToggleClick);
@@ -51,30 +61,21 @@ function loadCurrentWeather(location) {
  */
 function renderWeather() {
 	if (!loadedWeather) {
-		if (window.location.protocol === 'https:') {
-			// Special case, API restricted to http.
-			weatherDataElem.innerHTML = `
-			<p>You are using a secure https: connection.</p>
-			<p>Unfortunately due to restrictions with OpenWeatherMap's free services, we can only retrieve weather data using an unsecure http: connection.</p>
-			<p>Consider allowing this connection by clicking the shield or lock in your address bar and allowing "unsafe scripts" or similar.</p>
-			`;
-		}
-
 		return;
 	}
 
 	const metric = units === weather.UNITS.METRIC;
 
 	const weatherDataHTML = `
-	<h2 class="weather-data__title">${loadedWeather.name}</h2>
-	<p class="weather-data__conditions">${loadedWeather.weather.map(obj => obj.description).join(', ')}</p>
-	<div class="weather-data__icons">
-		${loadedWeather.weather.map(obj => '<img class="weather-data__icon" src="//openweathermap.org/img/w/' + obj.icon + '.png">').join('')}
-	</div>
-	<p class="weather-data__temperature">${metric ? loadedWeather.main.temp : celsiusToFahrenheit(loadedWeather.main.temp)}&deg; ${metric ? 'C' : 'F'}</p>
-	<p class="weather-data__humidity">${loadedWeather.main.humidity}% humidity</p>
-	<p class="weather-data__clouds">${loadedWeather.clouds.all}% cloud cover</p>
-	<p class="weather-data__wind">${metric ? loadedWeather.wind.speed : metersPerSecToMilesPerHour(loadedWeather.wind.speed)} ${metric ? 'meters/sec' : 'mph'} wind speed</p>
+		<h2 class="weather-data__title">${loadedWeather.name}</h2>
+		<p class="weather-data__conditions">${loadedWeather.weather.map(obj => obj.description).join(', ')}</p>
+		<div class="weather-data__icons">
+			${loadedWeather.weather.map(obj => '<img class="weather-data__icon" src="//openweathermap.org/img/w/' + obj.icon + '.png">').join('')}
+		</div>
+		<p class="weather-data__temperature">${metric ? loadedWeather.main.temp : celsiusToFahrenheit(loadedWeather.main.temp)}&deg; ${metric ? 'C' : 'F'}</p>
+		<p class="weather-data__humidity">${loadedWeather.main.humidity}% humidity</p>
+		<p class="weather-data__clouds">${loadedWeather.clouds.all}% cloud cover</p>
+		<p class="weather-data__wind">${metric ? loadedWeather.wind.speed : metersPerSecToMilesPerHour(loadedWeather.wind.speed)} ${metric ? 'meters/sec' : 'mph'} wind speed</p>
 	`;
 
 	weatherDataElem.innerHTML = weatherDataHTML;
