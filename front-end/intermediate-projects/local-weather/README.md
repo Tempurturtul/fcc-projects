@@ -2,7 +2,7 @@
 
 My take on Free Code Camp's [Show the Local Weather](https://www.freecodecamp.com/challenges/show-the-local-weather) project.
 
-**[View here.](https://tempurturtul.github.io/fcc-projects/local-weather/)**
+**[View here.](http://tempurturtul.github.io/fcc-projects/local-weather/)**
 
 **Completed:** February 2017
 
