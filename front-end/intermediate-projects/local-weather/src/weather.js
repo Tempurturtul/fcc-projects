@@ -3,7 +3,7 @@ const UNITS = {
 	IMPERIAL: 'imperial'
 };
 const defaultUnits = UNITS.METRIC;
-const apiUrl = '//api.openweathermap.org/data/2.5/weather';
+const apiUrl = 'http://api.openweathermap.org/data/2.5/weather';
 
 /**
  * Gets current weather data from OpenWeatherMap.
@@ -27,8 +27,6 @@ function getCurrent(location, units = defaultUnits) {
 	}
 
 	const url = apiUrl + query;
-
-	console.log('Fetching from ' + url);
 
 	return fetch(url)
 		.then(response => {

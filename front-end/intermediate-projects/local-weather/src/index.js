@@ -90,9 +90,8 @@ function handleWeatherFormSubmit(e) {
 
 /**
  * Handles the weather unit toggle button click event.
- * @param {event} e - The toggle button click event.
  */
-function handleWeatherUnitToggleClick(e) {
+function handleWeatherUnitToggleClick() {
 	const metric = units === weather.UNITS.METRIC;
 
 	units = metric ? weather.UNITS.IMPERIAL : weather.UNITS.METRIC;
@@ -106,7 +105,7 @@ function handleWeatherUnitToggleClick(e) {
  * @return {number} - Temperature in fahrenheit.
  */
 function celsiusToFahrenheit(c) {
-	return Math.round(c * (9/5) + 32);
+	return Math.round((c * (9 / 5)) + 32);
 }
 
 /**

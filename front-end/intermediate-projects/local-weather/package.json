@@ -19,7 +19,7 @@
     "preserve": "npm run build:watch & sleep 8; echo 'Hopefully done building...'",
     "serve": "browser-sync start --server 'dist' --files 'dist' --no-open",
     "start": "npm run serve",
-    "predeploy": "npm run build && mkdir .tmp && mv dist/* .tmp && mkdir dist/local-weather && mv .tmp/* dist/local-weather",
+    "predeploy": "npm test && npm run build && mkdir .tmp && mv dist/* .tmp && mkdir dist/local-weather && mv .tmp/* dist/local-weather",
     "deploy": "gh-pages --dist dist --add",
     "postdeploy": "npm run clean"
   },
