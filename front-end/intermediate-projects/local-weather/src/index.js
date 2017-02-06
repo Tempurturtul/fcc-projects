@@ -55,7 +55,7 @@ function renderWeather() {
 			// Special case, API restricted to http.
 			weatherDataElem.innerHTML = `
 			<p>You are using a secure https: connection.</p>
-			<p>Unfortunately due to restrictions with OpenWeatherMap\'s free services, we can only retrieve weather data using an unsecure http: connection.</p>
+			<p>Unfortunately due to restrictions with OpenWeatherMap's free services, we can only retrieve weather data using an unsecure http: connection.</p>
 			<p>Consider allowing this connection by clicking the shield or lock in your address bar and allowing "unsafe scripts" or similar.</p>
 			`;
 		}
