@@ -18,16 +18,6 @@ function init() {
 	// Remove no-js classes.
 	weatherElem.classList.remove('weather--no-js');
 
-	// Check connection.
-	if (window.location.protocol === 'https:') {
-		// Special case, API restricted to http.
-		weatherDataElem.innerHTML = `
-			<p>You are using a secure https: connection.</p>
-			<p>Unfortunately due to restrictions with OpenWeatherMap's free services, we can only retrieve weather data using an unsecure http: connection.</p>
-			<p>Consider allowing this connection by clicking the shield or lock in your address bar and allowing "unsafe scripts" or similar.</p>
-		`;
-	}
-
 	// Add event listeners.
 	weatherFormElem.addEventListener('submit', handleWeatherFormSubmit);
 	weatherUnitToggleElem.addEventListener('click', handleWeatherUnitToggleClick);
@@ -53,6 +43,16 @@ function loadCurrentWeather(location) {
 			console.log(err);
 			loadedWeather = null;
 			unrenderWeather();
+
+			// Check connection.
+			if (window.location.protocol === 'https:') {
+				// Special case, API restricted to http.
+				weatherDataElem.innerHTML = `
+					<p>You are using a secure https: connection.</p>
+					<p>Unfortunately due to restrictions with OpenWeatherMap's free services, we can only retrieve weather data using an unsecure http: connection.</p>
+					<p>Consider allowing this connection by clicking the shield or lock in your address bar and allowing "unsafe scripts" or similar.</p>
+				`;
+			}
 		});
 }
 
