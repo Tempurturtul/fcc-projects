@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Code Camp project - Local Weather">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Local Weather</title>
+
+		<link rel="stylesheet" href="main.css">
+
+		<!-- Google Analytics -->
+	    <script>
+	      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	      ga('create', 'UA-72597920-3', 'auto');
+	      ga('send', 'pageview');
+	    </script>
+	    <script async src='https://www.google-analytics.com/analytics.js'></script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="weather weather--no-js">
+				<h1 class="weather__title">Weather</h1>
+				<form class="weather-form">
+					<input class="weather-form__search" type="search" autocomplete="street-address" placeholder="Search">
+					<button class="weather-form__submit" type="submit">&#x1f50d;</button>
+					<button class="weather-form__unit-toggle" type="button">imperial &#8651; metric</button>
+				</form>
+				<div class="weather-data">
+				</div>
+				<small class="attribution">Weather data and icons provided by <a href="http://openweathermap.org/">OpenWeatherMap</a>.</small>
+			</div>
+		</div>
+		
+		<script src="bundle.js"></script>
+	</body>
+</html>
