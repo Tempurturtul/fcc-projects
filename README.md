@@ -10,6 +10,7 @@ My [Free Code Camp](https://www.freecodecamp.com/) projects.
 
 - [Tribute Page](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/basic-projects/tribute-page)
 - [Random Quote Machine](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/intermediate-projects/random-quote-machine)
+- [Local Weather](https://github.com/Tempurturtul/fcc-projects/tree/master/front-end/intermediate-projects/local-weather)
 
 **Back End**
 
