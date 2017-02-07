@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Code Camp project - Wikipedia Viewer">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Wikipedia Viewer</title>
+
+		<link rel="stylesheet" href="main.css">
+
+		<!-- Google Analytics -->
+	    <script>
+	      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	      ga('create', 'UA-72597920-3', 'auto');
+	      ga('send', 'pageview');
+	    </script>
+	    <script async src='https://www.google-analytics.com/analytics.js'></script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="wikipedia-viewer wikipedia-viewer--no-js">
+				<h1 class="wikipedia-viewer__title">Wikipedia Viewer</h1>
+				<form class="wikipedia-form">
+					<input class="wikipedia-form__search" type="search" placeholder="Search">
+					<button class="wikipedia-form__submit" type="submit">&#x1f50d;</button>
+					<button class="wikipedia-form__random" type="button">Random Article</button>
+				</form>
+				<div class="wikipedia-articles">
+				</div>
+				<footer class="attribution"><small>Articles provided by <a href="https://wikipedia.org">Wikipedia</a>.</small></footer>
+			</div>
+		</div>
+
+		<script src="bundle.js"></script>
+	</body>
+</html>
