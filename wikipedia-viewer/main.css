@@ -1,0 +1,77 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: crimson;
+}
+
+a:visited {
+	color: blueviolet;
+}
+
+.wikipedia-viewer {
+	padding: 10px;
+	max-width: 800px;
+	margin: 10px auto;
+}
+
+.wikipedia-viewer__title {
+	text-align: center;
+}
+
+.wikipedia-viewer--no-js .wikipedia-form {
+	display: none;
+}
+
+.wikipedia-viewer--no-js .wikipedia-articles::after {
+	content: "Requires JavaScript."
+}
+
+.wikipedia-form {
+	text-align: center;
+	margin: 20px 10px;
+}
+
+.wikipedia-form__random {
+	display: block;
+	margin: 5px auto;
+}
+
+.wikipedia-articles {
+	border: solid 1px grey;
+	border-radius: 5px;
+	text-align: center;
+	min-height: 200px;
+}
+
+.wikipedia-article {
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+.wikipedia-article:not(:first-of-type) {
+	border-top: solid 1px grey;
+}
+
+.wikipedia-article__title {
+
+}
+
+.wikipedia-article__extract {
+	background-color: #eee;
+	border: dashed 1px grey;
+	padding: 10px 20px;
+	margin: 10px 0;
+}
+
+.attribution {
+	text-align: right;
+}
