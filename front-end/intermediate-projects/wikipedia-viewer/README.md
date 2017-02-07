@@ -2,7 +2,7 @@
 
 My take on Free Code Camp's [Build a Wikipedia Viewer](https://www.freecodecamp.com/challenges/build-a-wikipedia-viewer) project.
 
-**[View here.](http://tempurturtul.github.io/fcc-projects/wikipedia-viewer/)**
+**[View here.](https://tempurturtul.github.io/fcc-projects/wikipedia-viewer/)**
 
 **Completed:** February 2017
 
