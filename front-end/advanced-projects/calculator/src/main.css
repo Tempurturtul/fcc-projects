@@ -1,0 +1,66 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.row {
+	display: flex;
+}
+
+#root {
+	text-align: center;
+	padding: 30px 0;
+}
+
+.calculator {
+	display: inline-block;
+	border: solid black 1px;
+	box-shadow: 0 0 3px 1px grey;
+	border-radius: 4px;
+	padding: 15px 5px;
+}
+
+.calculator--no-js .calculator__display-text::after {
+	content: 'JavaScript required.';
+}
+
+.calculator__display {
+	/* Width equivalent to five buttons plus margins. */
+	width: 266px;
+	border: solid grey 1px;
+	overflow-x: scroll;
+	margin: 4px 2px;
+}
+
+.calculator__display-text {
+	padding: 5px;
+	white-space: nowrap;
+	font-family: monospace;
+}
+
+.calculator__display-text::after {
+	/* Always insert a space to prevent height changes if the text becomes empty. */
+	content: '\00a0';
+}
+
+.calculator__button {
+	width: 50px;
+	height: 35px;
+	margin: 4px 2px;
+	padding: 0;
+}
+
+.calculator__button--disabled {
+	opacity: 0.5;
+}
+
+.calculator__long-button {
+	/* Width equivalent to two buttons plus margins. */
+	width: 104px;
+}

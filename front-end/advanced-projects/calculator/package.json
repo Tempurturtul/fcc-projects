@@ -1,0 +1,39 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "My take on Free Code Camp's Build a JavaScript Calculator project.",
+  "scripts": {
+    "clean": "del-cli dist .tmp",
+    "build:js": "rollup --config",
+    "build:js:watch": "rollup --config --watch",
+    "build:html": "cpy src/index.html dist",
+    "build:html:watch": "chokidar 'src/**/*.html' --command 'npm run build:html' --initial",
+    "build:css": "cpy src/main.css dist",
+    "build:css:watch": "chokidar 'src/**/*.css' --command 'npm run build:css' --initial",
+    "prebuild": "npm run clean",
+    "build": "npm run build:js && npm run build:html && npm run build:css",
+    "prebuild:watch": "npm run clean",
+    "build:watch": "npm run build:js:watch & npm run build:html:watch & npm run build:css:watch",
+    "test": "xo --env browser",
+    "preserve": "npm run build:watch & sleep 8; echo 'Hopefully done building...'",
+    "serve": "browser-sync start --server 'dist' --files 'dist' --no-open",
+    "start": "npm run serve",
+    "predeploy": "npm test && npm run build && mkdir .tmp && mv dist/* .tmp && mkdir dist/calculator && mv .tmp/* dist/calculator",
+    "deploy": "gh-pages --dist dist --add",
+    "postdeploy": "npm run clean"
+  },
+  "author": "Matthew Feidt",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.7",
+    "chokidar-cli": "^1.2.0",
+    "cpy-cli": "^1.0.1",
+    "del-cli": "^0.2.1",
+    "gh-pages": "^0.12.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-watch": "^3.2.2",
+    "xo": "^0.17.1"
+  }
+}
