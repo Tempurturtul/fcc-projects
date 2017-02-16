@@ -1,3 +1,9 @@
+/* eslint-disable no-eval */
+
+// "Copy" eval to make it use global scope instead of local.
+// (See: https://github.com/rollup/rollup/wiki/Troubleshooting#avoiding-eval)
+const eval2 = eval;
+
 const calculatorElem = document.querySelector('.calculator');
 const calculatorDisplayElem = calculatorElem.querySelector('.calculator__display');
 const calculatorDisplayTextElem = calculatorElem.querySelector('.calculator__display-text');
@@ -26,19 +32,19 @@ function evaluate(expression) {
 
 	// Invalid expression characters.
 	// (Anything not operators, numbers, decimals, or parens.)
-	const re = /[^\+|\-|\*|\/|\d|\.|\(|\)]/;
+	const re = /[^+|\-|*|/|\d|.|(|)]/;
 
 	if (re.test(expression)) {
 		throw new Error(`Invalid expression ${expression}`);
 	}
 
-	return eval(expression);
+	return eval2(expression);
 }
 
 function handleCalcButtonClick(e) {
 	const char = e.target.innerHTML;
 
-	switch(char) {
+	switch (char) {
 		case '&lt;':
 			backspace();
 			break;
@@ -55,38 +61,24 @@ function handleCalcButtonClick(e) {
 }
 
 function handleKeydown(e) {
-	switch (e.key) {
-		case 'Backspace':
-			backspace();
-			break;
-		case 'Delete':
-		case 'c':
-			clear();
-			break;
-		case 'Enter':
-			equals();
-			break;
-		case '(':
-		case ')':
-		case '*':
-		case '/':
-		case '+':
-		case '-':
-		case '.':
-		case '0':
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-			input(e.key);
-			break;
-		default:
-			// no-op
+	const key = e.key;
+
+	if (key === 'Backspace') {
+		return backspace();
+	}
+
+	if (key === 'Delete' || key === 'c') {
+		return clear();
+	}
+
+	if (key === 'Enter') {
+		return equals();
+	}
+
+	const validInputs = '()*/+-.0123456789'.split('');
+
+	if (validInputs.indexOf(key) !== -1) {
+		return input(key);
 	}
 }
 
@@ -115,9 +107,9 @@ function equals() {
 
 	try {
 		const result = evaluate(calculatorDisplayTextElem.innerHTML);
-		calculatorDisplayTextElem.innerHTML = result;
-	} catch(e) {
-		console.log(e);
+		calculatorDisplayTextElem.innerHTML = (result === undefined) ? '' : result;
+	} catch (err) {
+		console.log(err);
 		calculatorDisplayTextElem.innerHTML = 'Error';
 		showingError = true;
 	}
