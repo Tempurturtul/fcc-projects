@@ -1,0 +1,110 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: crimson;
+	text-decoration: none;
+}
+
+a:visited {
+	color: blueviolet;
+}
+
+#root {
+	/* Prevent margin overflow. */
+	border: solid 1px rgba(0, 0, 0, 0);
+}
+
+.streamers {
+	margin: 0 auto;
+	padding: 10px;
+	text-align: center;
+	max-width: 500px;
+}
+
+.streamers--no-js .streamers__list::after {
+	content: 'JavaScript required.';
+}
+
+.streamers__title {
+	text-align: center;
+}
+
+.streamers__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.streamer {
+	border: solid black 1px;
+	border-radius: 3px;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.streamer__header {
+	position: relative;
+	height: 80px;
+	margin: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.streamer__name {
+	margin: 0;
+	/* Overlap on top of logo if view is too narrow. */
+	background-color: white;
+	z-index: 1;
+	padding: 5px;
+}
+
+.streamer__logo {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.streamer__stream {
+	width: 100%;
+	padding: 10px;
+}
+
+.streamer__stream-preview {
+	border: solid #0b0 4px;
+	border-radius: 20px;
+	padding: 3px;
+	background-color: #333;
+	max-width: 100%;
+}
+
+.streamer__stream-offline-notice {
+	border: solid #b00 4px;
+	border-radius: 20px;
+	padding: 3px;
+	background-color: #333;
+	max-width: 200px;
+	color: white;
+	margin: 0 auto;
+}
+
+.streamer__game {
+	font-weight: bold;
+}
+
+.streamer__status {
+	font-style: italic;
+}
