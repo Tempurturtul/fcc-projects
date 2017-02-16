@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Code Camp project - Calculator">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Calculator</title>
+
+		<link rel="stylesheet" href="main.css">
+
+		<!-- Google Analytics -->
+	    <script>
+	      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	      ga('create', 'UA-72597920-3', 'auto');
+	      ga('send', 'pageview');
+	    </script>
+	    <script async src='https://www.google-analytics.com/analytics.js'></script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="calculator calculator--no-js">
+				<!-- [                           ] -->
+				<!-- [   ] [   ] [   ] [ < ] [ c ] -->
+				<!-- [ 7 ] [ 8 ] [ 9 ] [ ( ] [ ) ] -->
+				<!-- [ 4 ] [ 5 ] [ 6 ] [ * ] [ / ] -->
+				<!-- [ 1 ] [ 2 ] [ 3 ] [ + ] [ - ] -->
+				<!-- [ 0 ] [ . ] [   ] [    =    ] -->
+				<div class="calculator__display">
+					<p class="calculator__display-text"></p>
+				</div>
+				<div class="row">
+					<button class="calculator__button calculator__button--disabled" disabled></button>
+					<button class="calculator__button calculator__button--disabled" disabled></button>
+					<button class="calculator__button calculator__button--disabled" disabled></button>
+					<button class="calculator__button">&lt;</button>
+					<button class="calculator__button">c</button>
+				</div>
+				<div class="row">
+					<button class="calculator__button">7</button>
+					<button class="calculator__button">8</button>
+					<button class="calculator__button">9</button>
+					<button class="calculator__button">(</button>
+					<button class="calculator__button">)</button>
+				</div>
+				<div class="row">
+					<button class="calculator__button">4</button>
+					<button class="calculator__button">5</button>
+					<button class="calculator__button">6</button>
+					<button class="calculator__button">*</button>
+					<button class="calculator__button">/</button>
+				</div>
+				<div class="row">
+					<button class="calculator__button">1</button>
+					<button class="calculator__button">2</button>
+					<button class="calculator__button">3</button>
+					<button class="calculator__button">+</button>
+					<button class="calculator__button">-</button>
+				</div>
+				<div class="row">
+					<button class="calculator__button">0</button>
+					<button class="calculator__button">.</button>
+					<button class="calculator__button calculator__button--disabled" disabled></button>
+					<button class="calculator__button calculator__long-button">=</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="bundle.js"></script>
+	</body>
+</html>
