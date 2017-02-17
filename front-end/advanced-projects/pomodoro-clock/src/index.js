@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+
 import leftPad from './left-pad';
 
 const clockElem = document.querySelector('.pomodoro-clock');
