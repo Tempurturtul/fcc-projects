@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Code Camp project - Pomodoro Clock">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Pomodoro Clock</title>
+
+		<link rel="stylesheet" href="main.css">
+
+		<!-- Google Analytics -->
+	    <script>
+	      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	      ga('create', 'UA-72597920-3', 'auto');
+	      ga('send', 'pageview');
+	    </script>
+	    <script async src='https://www.google-analytics.com/analytics.js'></script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="pomodoro-clock pomodoro-clock--no-js">
+				<p class="pomodoro-clock__display"></p>
+				<button class="pomodoro-clock__toggle-button">Start</button>
+				<button class="pomodoro-clock__reset-button">Reset</button>
+				<form class="settings">
+					<p class="settings__setting-description">Work for <input class="settings__number-setting" id="work-duration" type="number" min=1 max=360 step=1 value=25> minutes.</p>
+				</form>
+			</div>
+		</div>
+
+		<script src="bundle.js"></script>
+	</body>
+</html>
