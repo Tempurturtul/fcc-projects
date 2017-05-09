@@ -2,6 +2,7 @@ const express = require('express');
 const pg = require('pg');
 const url = require('url');
 const validURL = require('valid-url');
+const Hashids = require('hashids');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,6 +18,10 @@ const pool = new pg.Pool({
   database: poolParams.pathname.split('/')[1],
   ssl: true,
 });
+
+const seed = 'URL Shortener Microservice';
+const padding = 4;
+const hashids = new Hashids(seed, padding);
 
 app.use(express.static('public'));
 
@@ -35,7 +40,8 @@ app.get('/new/*', (request, response) => {
 
   storeURL(original_url)
     .then((id) => {
-      const short_url = `${request.protocol}://${request.get('host')}/s/${id}`;
+      const obfuscatedID = obfuscateShortID(id);
+      const short_url = `${request.protocol}://${request.get('host')}/s/${obfuscatedID}`;
 
       response.json({
         original_url,
@@ -50,7 +56,8 @@ app.get('/new/*', (request, response) => {
 });
 
 app.get('/s/:id', (request, response) => {
-  const id = request.params.id;
+  const obfuscatedID = request.params.id
+  const id = deobfuscateShortID(obfuscatedID);
 
   retrieveURL(id)
     .then((url) => {
@@ -119,4 +126,12 @@ function retrieveShortID(original) {
       resolve(result && result.rows.length ? result.rows[0].short_id : null);
     });
   });
+}
+
+function obfuscateShortID(short_id) {
+  return hashids.encode(String(id).split(''));
+}
+
+function deobfuscateShortID(str) {
+  return Number(hashids.decode(str).join(''));
 }
