@@ -129,7 +129,7 @@ function retrieveShortID(original) {
 }
 
 function obfuscateShortID(short_id) {
-  return hashids.encode(String(id).split(''));
+  return hashids.encode(String(short_id).split(''));
 }
 
 function deobfuscateShortID(str) {
