@@ -10,12 +10,12 @@
   "author": "Matthew Feidt",
   "license": "ISC",
   "engines": {
-    "node": "^6.9.3"
+    "node": "^6.11.1"
   },
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.15.3"
   },
   "devDependencies": {
-    "gh-pages": "^0.12.0"
+    "gh-pages": "^1.0.0"
   }
 }
